@@ -1,0 +1,18 @@
+{
+    "name": "jourcraft-server",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "node --watch --loader ts-node/esm src/server.ts",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/server.js"
+    },
+    "dependencies": {
+        "argon2": "^0.31.2",
+        "mysql2": "^3.11.0"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.3"
+    }
+}
