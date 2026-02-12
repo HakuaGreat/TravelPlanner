@@ -2,14 +2,14 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { json } from "./http/response.js";
 import { HttpError } from "./http/body.js";
 
-export type Hadler = (req: IncomingMessage, res: ServerResponse, 
+export type Handler = (req: IncomingMessage, res: ServerResponse, 
     params: Record<string, string>) => Promise<void> | void;
 
 type Route = {
     method: string;
     pattern: RegExp;
     keys: string[];
-    hadler: Hadler;
+    handler: Handler;
 };
 
 function compilePath(path: string): { pattern: RegExp; keys: string[] } {
@@ -28,7 +28,7 @@ function compilePath(path: string): { pattern: RegExp; keys: string[] } {
 export class Router {
     private routes: Route[] = [];
 
-    on(method: string, path: string, hadler: Handler) {
+    on(method: string, path: string, handler: Handler) {
         const { pattern, keys } = compilePath(path);
         this.routes.push({ method: method.toUpperCase(), pattern, keys, handler });
     }
